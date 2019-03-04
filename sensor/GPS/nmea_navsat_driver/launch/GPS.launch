@@ -1,0 +1,6 @@
+<launch>
+
+  <include file="$(find nmea_navsat_driver)/launch/gpsdriver.launch" />
+  <include file="$(find gps_common)/launch/LL_UTM.launch" />
+
+</launch>

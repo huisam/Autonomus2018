@@ -1,0 +1,32 @@
+<launch>
+    <node pkg="obstacle_flag" type="obstacle_flag" name="obstacle_flag" output="screen">
+        <rosparam file="$(find obstacle_flag)/cfg/flag_check.yaml" command="load"/>
+    </node>
+
+ 	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="uturn_filter">
+        <rosparam file="$(find laser_filters)/cfg/uturn_cut.yaml" command="load"/>
+		<remap from="/scan"  to="/uturn_scan"/>
+	</node>
+
+ 	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="dynamic_filter">
+        <rosparam file="$(find laser_filters)/cfg/dynamic_cut.yaml" command="load"/>
+		<remap from="/scan"  to="/dynamic_scan"/>
+	</node>
+
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="park_filter">
+        <rosparam file="$(find laser_filters)/cfg/park_cut.yaml" command="load"/>
+		<remap from="/scan"  to="/park_scan"/>
+	</node>
+
+    <node pkg="obstacle_detector" type="obstacle_extractor_node" name="dynamic_obstacle_extractor">
+  	    <remap from="/scan"  to="/dynamic_scan"/>
+        <remap from="/raw_obstacles" to="/dynamic_obstacle"/>
+        <rosparam file="$(find obstacle_flag)/cfg/dynamic_obstacle.yaml" command="load"/>
+    </node>
+    <node pkg="obstacle_detector" type="obstacle_extractor_node" name="parking_obstacle_extractor">
+    <remap from="/raw_obstacles" to="/park_obstacle"/>
+    <remap from="/scan" to="/park_scan"/>
+        <rosparam file="$(find obstacle_flag)/cfg/park_obstacle.yaml" command="load"/>
+  </node>
+
+</launch>

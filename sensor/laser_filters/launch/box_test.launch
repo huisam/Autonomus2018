@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="laser_filters" type="scan_to_cloud_filter_chain" name="scan_to_cloud_filter_chain">
+    	<rosparam file="$(find laser_filters)/cfg/box_test.yaml" command="load"/>
+    </node>
+</launch>

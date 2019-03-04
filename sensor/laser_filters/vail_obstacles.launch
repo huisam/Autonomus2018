@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="scan_to_scan_filter_chain">
+		<rosparam file="$(find laser_filters)/vail_obstacles.yaml" command="load"/>
+    </node>
+</launch>

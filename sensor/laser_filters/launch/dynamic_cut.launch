@@ -1,0 +1,11 @@
+<launch>
+ 	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="uturn_filter">
+        <rosparam file="$(find laser_filters)/cfg/uturn_cut.yaml" command="load"/>  
+		<remap from="/scan"  to="/uturn_scan"/>
+	</node>
+ 	<node pkg="laser_filters" type="scan_to_scan_filter_chain" name="dynamic_filter">
+        <rosparam file="$(find laser_filters)/cfg/dynamic_cut.yaml" command="load"/>  
+		<remap from="/scan_raw"  to="/dynamic_scan"/>
+	</node>
+  <include file="$(find obstacle_detector)/launch/nodes.launch" />
+</launch>

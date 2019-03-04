@@ -1,0 +1,9 @@
+<launch>
+ <node pkg="gps_common" type="utm_odometry_node" name="Degree_To_UTM" />
+ 
+ <param name="/gps/easting_shift" value="319000"/>
+ <param name="/gps/northing_shift" value="4151000"/>
+
+ <param name="GPS_Odometry_initial" value="false"/>
+
+</launch>
